@@ -13,11 +13,13 @@ public class Scene extends JPanel {
 
     private ImageIcon icoFond;
     private Image imgFond1;
+    private Image imgFond2;
 
     private ImageIcon icoMario; //* code provisoire
     private Image imgMario; //* code provisoire
 
     private int xFond1;
+    private int xFond2;
     private int dx;
 
 
@@ -27,10 +29,13 @@ public class Scene extends JPanel {
         super();
 
         this.xFond1 = -50;
+        this.xFond2 = 750;
         this.dx = 0 ;
 
         icoFond = new ImageIcon(getClass().getResource("/images/fondEcran.png"));
         this.imgFond1 = this.icoFond.getImage();
+
+        this.imgFond2 = this.icoFond.getImage();
         icoMario = new ImageIcon(getClass().getResource("/images/marioMarcheDroite.png"));
         this.imgMario = this.icoMario.getImage();
 
@@ -53,8 +58,13 @@ public class Scene extends JPanel {
     //**** METHODES ****//
     public void deplacementFond() { // D placement du fond lorsque mario se d place
             this.xFond1 = this.xFond1 - this.dx;
+            this.xFond2 = this.xFond2 - this.dx;
             // Remise à zero des abscisses pour rotation des images de fond
 
+        if (this.xFond1 == -800) {this.xFond1 = 800;}
+        else if (this.xFond2 == -800) {this.xFond2 = 800;}
+        else if (this.xFond1 == 800) {this.xFond1 = -800;}
+        else if (this.xFond2 == 800) {this.xFond2 = -800;}
     }
 
 
@@ -67,6 +77,7 @@ public class Scene extends JPanel {
         this.deplacementFond();
 
         g2.drawImage(this.imgFond1, this.xFond1, 0, null); // Dessin de l'image de fond
+        g2.drawImage(this.imgFond2, this.xFond2, 0, null);
         g2.drawImage(imgMario, 300, 245, null); //*** code provisoire
     }
 }
