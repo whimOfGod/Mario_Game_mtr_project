@@ -7,10 +7,15 @@ public class Clavier implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            // Annule le décalage de 1 créé par deplacementFond (PanJeu)
+            if (Main.scene.getxPos() == -1) {
+                Main.scene.setxPos(0);
+                Main.scene.setxFond1(-50);
+                Main.scene.setxFond2(750);
+            }
             Main.scene.setDx(1);
-        }
-        else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+        }else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             Main.scene.setDx(-1);
         }
     }
