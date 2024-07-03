@@ -9,6 +9,8 @@ import java.util.Objects;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import code.devteam.game.personnages.Mario;
+
 @SuppressWarnings("serial")
 public class Scene extends JPanel {
 
@@ -26,13 +28,14 @@ public class Scene extends JPanel {
     private Image imgFond1;
     private Image imgFond2;
 
-    private ImageIcon icoMario; //* code provisoire
-    private Image imgMario; //* code provisoire
 
     private int xFond1;
     private int xFond2;
     private int dx;
     private int xPos; // position de mario relative au jeu
+
+    public Mario mario;
+
     private int ySol; // altitude courante (utile seulement pour mario)
     private int hautPlafond; // hauteur maximale courante (utile seulement pour mario)
     private boolean ok;
@@ -50,20 +53,21 @@ public class Scene extends JPanel {
         this.xPos = -1;
 
         icoFond = new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/fondEcran.png")));
-        imgFond1 = icoFond.getImage();
-        imgFond2 = icoFond.getImage();
+        this.imgFond1 = this.icoFond.getImage();
+        this.imgFond2 = this.icoFond.getImage();
+
         icoChateau1 = new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/chateau1.png")));
         imgChateau1 = icoChateau1.getImage();
         icoDepart = new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/depart.png")));
         imgDepart = icoDepart.getImage();
+
+        mario = new Mario(300,245);
+
         icoDrapeau = new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/drapeau.png")));
         imgDrapeau = icoDrapeau.getImage();
         icoChateauFin = new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/chateauFin.png")));
         imgChateauFin = icoChateauFin.getImage();
 
-
-        icoMario = new ImageIcon(getClass().getResource("/images/marioMarcheDroite.png"));
-        this.imgMario = this.icoMario.getImage();
 
         this.setFocusable(true);
         this.addKeyListener(new Clavier());
@@ -130,7 +134,7 @@ public class Scene extends JPanel {
 
         g2.drawImage(this.imgFond1, this.xFond1, 0, null); // Dessin de l'image de fond
         g2.drawImage(this.imgFond2, this.xFond2, 0, null);
-        g2.drawImage(imgMario, 300, 245, null); //*** code provisoire
+        g2.drawImage(this.mario.getImgMario(),300, 245, null); //*** code provisoire
         // Image du ch teau du d part
         g2.drawImage(imgChateau1, 10 - this.xPos, 95, null);
         // Image du panneau de d part
