@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import code.devteam.game.objets.Bloc;
 import code.devteam.game.objets.TuyauRouge;
 import code.devteam.game.personnages.Mario;
+import code.devteam.game.personnages.Personnage.*;
 
 @SuppressWarnings("serial")
 public class Scene extends JPanel {
@@ -137,7 +138,14 @@ public class Scene extends JPanel {
         super.paintComponent(g);
         Graphics g2 = (Graphics2D)g;
 
+        //Détection contact
+        if (this.mario.contactAvant(tuyauRouge1)){
+            this.mario.setMarche(false);
+            this.dx = 0;
+        }
         this.deplacementFond();
+        this.tuyauRouge1.deplacement();
+
 
         g2.drawImage(this.imgFond1, this.xFond1, 0, null); // Dessin de l'image de fond
         g2.drawImage(this.imgFond2, this.xFond2, 0, null);
@@ -151,7 +159,7 @@ public class Scene extends JPanel {
         // Image du château d'arrivee
         g2.drawImage(imgChateauFin, 5000 - this.xPos, 145, null);
 
-        g2.drawImage(tuyauRouge1.getImgTuyauRouge(), this.tuyauRouge1.getX() - this.xPos, this.tuyauRouge1.getY(), null);
+        g2.drawImage(tuyauRouge1.getImgTuyauRouge(), this.tuyauRouge1.getX(), this.tuyauRouge1.getY(), null);
         g2.drawImage(bloc1.getImgBloc(), this.bloc1.getX() - this.xPos, this.bloc1.getY(), null);
 
             }

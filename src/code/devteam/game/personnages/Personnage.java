@@ -1,5 +1,7 @@
 package code.devteam.game.personnages;
 
+import code.devteam.game.objets.Objet;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -74,5 +76,56 @@ public class Personnage {
         return img;
     }
 
+    public boolean contactAvant(Objet objet){
+        if(this.isVersDroite() == true){
+            if(this.x + this.largeur < objet.getX() || this.x + this.largeur > objet.getX() + 5 || this.y + this.hauteur <= objet.getY() || this.y >= objet.getY() + objet.getHauteur()){return false;}
+            else{return true;}
+        }else{return false;}
+    }
+
+    protected boolean contactArriere(Objet objet){
+        if(this.x > objet.getX() + objet.getLargeur() || this.x + this.largeur < objet.getX() + objet.getLargeur() - 5 || this.y + this.hauteur <= objet.getY() || this.y >= objet.getY() + objet.getHauteur()){return false;}
+        else{return true;}
+    }
+
+    protected boolean contactDessous(Objet objet){
+        if(this.x + this.largeur < objet.getX() + 5 || this.x > objet.getX() + objet.getLargeur() - 5 || this.y + this.hauteur < objet.getY() || this.y + this.hauteur > objet.getY() + 5){return false;}
+        else{return true;}
+    }
+
+    protected boolean contactDessus(Objet objet){
+        if(this.x + this.largeur < objet.getX() + 5 || this.x > objet.getX() + objet.getLargeur() - 5 || this.y < objet.getY() + objet.getHauteur() || this.y > objet.getY() + objet.getHauteur() + 5){return false;}
+        else{return true;}
+    }
+
+    public boolean proche(Objet objet){
+        if((this.x > objet.getX() - 10 && this.x < objet.getX() + objet.getLargeur() + 10)
+                || (this.x + this.largeur > objet.getX() - 10 && this.x + this.largeur < objet.getX() + objet.getLargeur() + 10)){return true;}
+        else{return false;}
+    }
+
+    public boolean contactAvant(Personnage personnage){
+        if(this.isVersDroite() == true){
+            if(this.x + this.largeur < personnage.getX() || this.x + this.largeur > personnage.getX() + 5 || this.y + this.hauteur <= personnage.getY() || this.y >= personnage.getY() + personnage.getHauteur()){return false;}
+            else{return true;}
+        }else{return false;}
+    }
+
+    protected boolean contactArriere(Personnage personnage){
+        if(this.x > personnage.getX() + personnage.getLargeur() || this.x + this.largeur < personnage.getX() + personnage.getLargeur() - 5 || this.y + this.hauteur <= personnage.getY() || this.y >= personnage.getY() + personnage.getHauteur()){return false;}
+        else{return true;}
+    }
+
+    protected boolean contactDessous(Personnage personnage){
+        if(this.x + this.largeur < personnage.getX() || this.x > personnage.getX() + personnage.getLargeur() || this.y + this.hauteur < personnage.getY() || this.y + this.hauteur > personnage.getY()){return false;}
+        else{return true;}
+    }
+
+    public boolean proche(Personnage personnage){
+        if((this.x > personnage.getX() - 10 && this.x < personnage.getX() + personnage.getLargeur() + 10)
+                || (this.x + this.largeur > personnage.getX() - 10 && this.x + this.largeur < personnage.getX() + personnage.getLargeur() + 10)){return true;}
+        else{return false;}
+    }
 }
+
 
