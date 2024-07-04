@@ -76,7 +76,7 @@ public class Personnage {
         return img;
     }
 
-    public boolean contactAvant(Objet objet){
+    protected boolean contactAvant(Objet objet){
         if(this.isVersDroite() == true){
             if(this.x + this.largeur < objet.getX() || this.x + this.largeur > objet.getX() + 5 || this.y + this.hauteur <= objet.getY() || this.y >= objet.getY() + objet.getHauteur()){return false;}
             else{return true;}
@@ -104,7 +104,7 @@ public class Personnage {
         else{return false;}
     }
 
-    public boolean contactAvant(Personnage personnage){
+    protected boolean contactAvant(Personnage personnage){
         if(this.isVersDroite() == true){
             if(this.x + this.largeur < personnage.getX() || this.x + this.largeur > personnage.getX() + 5 || this.y + this.hauteur <= personnage.getY() || this.y >= personnage.getY() + personnage.getHauteur()){return false;}
             else{return true;}
@@ -126,6 +126,7 @@ public class Personnage {
                 || (this.x + this.largeur > personnage.getX() - 10 && this.x + this.largeur < personnage.getX() + personnage.getLargeur() + 10)){return true;}
         else{return false;}
     }
+
 }
 
 

@@ -1,6 +1,7 @@
 package code.devteam.game.personnages;
 
 import code.devteam.game.Main;
+import code.devteam.game.objets.Objet;
 
 import java.awt.Image;
 import java.util.Objects;
@@ -65,4 +66,21 @@ public class Mario extends Personnage {
         return img;
     }
 
+    public void contact(Objet objet) {
+        if((super.contactAvant(objet) == true && this.isVersDroite() == true) || (super.contactArriere(objet) == true && this.isVersDroite() == false)){
+            Main.scene.setDx(0);
+            this.setMarche(false);
+        }
+        if(super.contactDessous(objet) == true && this.saut == true){
+            Main.scene.setySol(objet.getY());
+        }else if(super.contactDessous(objet) == false){
+            Main.scene.setySol(293); // altitude du sol initial
+            if(this.saut == false){this.setY(243);}
+        }
+        if(super.contactDessus(objet) == true){
+            Main.scene.setHautPlafond(objet.getY() + objet.getHauteur()); // le plafond devient le dessous de l'objet
+        }else if(super.contactDessus(objet) == false && this.saut == false){
+            Main.scene.setHautPlafond(0);
+        }
+    }
 }

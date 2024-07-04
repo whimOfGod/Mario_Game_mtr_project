@@ -141,17 +141,16 @@ public class Scene extends JPanel {
         Graphics g2 = (Graphics2D)g;
 
         //Détection contact
-        if (this.mario.contactAvant(tuyauRouge1) == true) {
-            this.mario.setMarche(false);
-            this.dx = 0;
-        }
+        if (this.mario.proche(this.bloc1)){this.mario.contact(bloc1);}
+        if (this.mario.proche(this.tuyauRouge1)){this.mario.contact(tuyauRouge1);}
+
         this.deplacementFond();
         this.tuyauRouge1.deplacement();
+        this.bloc1.deplacement();
 
 
         g2.drawImage(this.imgFond1, this.xFond1, 0, null); // Dessin de l'image de fond
         g2.drawImage(this.imgFond2, this.xFond2, 0, null);
-
         // Image du ch teau du d part
         g2.drawImage(imgChateau1, 10 - this.xPos, 95, null);
         // Image du panneau de d part
@@ -160,9 +159,8 @@ public class Scene extends JPanel {
         g2.drawImage(imgDrapeau, 4650 - this.xPos, 115, null);
         // Image du château d'arrivee
         g2.drawImage(imgChateauFin, 5000 - this.xPos, 145, null);
-
         g2.drawImage(tuyauRouge1.getImgTuyauRouge(), this.tuyauRouge1.getX(), this.tuyauRouge1.getY(), null);
-        g2.drawImage(bloc1.getImgBloc(), this.bloc1.getX() - this.xPos, this.bloc1.getY(), null);
+        g2.drawImage(bloc1.getImgBloc(), this.bloc1.getX(), this.bloc1.getY(), null);
         if (this.mario.isSaut()) {
             g2.drawImage(this.mario.saute(), this.mario.getX(), this.mario.getY(), null);
         } else {
