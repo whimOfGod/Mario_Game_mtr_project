@@ -9,6 +9,8 @@ import java.util.Objects;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import code.devteam.game.objets.Bloc;
+import code.devteam.game.objets.TuyauRouge;
 import code.devteam.game.personnages.Mario;
 
 @SuppressWarnings("serial")
@@ -35,10 +37,13 @@ public class Scene extends JPanel {
     private int xPos; // position de mario relative au jeu
 
     public Mario mario;
+    public TuyauRouge tuyauRouge1;
+    public Bloc bloc1;
 
     private int ySol; // altitude courante (utile seulement pour mario)
     private int hautPlafond; // hauteur maximale courante (utile seulement pour mario)
     private boolean ok;
+
 
 
 
@@ -62,6 +67,8 @@ public class Scene extends JPanel {
         imgDepart = icoDepart.getImage();
 
         mario = new Mario(300,245);
+        tuyauRouge1 = new TuyauRouge(600, 230);
+        bloc1 = new Bloc(400,180);
 
         icoDrapeau = new ImageIcon(Objects.requireNonNull(getClass().getResource("/images/drapeau.png")));
         imgDrapeau = icoDrapeau.getImage();
@@ -134,14 +141,18 @@ public class Scene extends JPanel {
 
         g2.drawImage(this.imgFond1, this.xFond1, 0, null); // Dessin de l'image de fond
         g2.drawImage(this.imgFond2, this.xFond2, 0, null);
-        g2.drawImage(this.mario.getImgMario(),300, 245, null); //*** code provisoire
+        g2.drawImage(this.mario.marche( "mario",10),300, 245, null); //*** code provisoire
         // Image du ch teau du d part
         g2.drawImage(imgChateau1, 10 - this.xPos, 95, null);
         // Image du panneau de d part
         g2.drawImage(imgDepart, 220 - this.xPos, 234, null);
-        // Image du drapeau d'arriv e
+        // Image du drapeau d'arrivee
         g2.drawImage(imgDrapeau, 4650 - this.xPos, 115, null);
-        // Image du ch teau d'arriv e
+        // Image du château d'arrivee
         g2.drawImage(imgChateauFin, 5000 - this.xPos, 145, null);
-    }
+
+        g2.drawImage(tuyauRouge1.getImgTuyauRouge(), this.tuyauRouge1.getX() - this.xPos, this.tuyauRouge1.getY(), null);
+        g2.drawImage(bloc1.getImgBloc(), this.bloc1.getX() - this.xPos, this.bloc1.getY(), null);
+
+            }
 }

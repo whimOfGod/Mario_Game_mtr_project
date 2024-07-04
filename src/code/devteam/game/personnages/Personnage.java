@@ -1,5 +1,8 @@
 package code.devteam.game.personnages;
 
+import javax.swing.*;
+import java.awt.*;
+
 public class Personnage {
     //**** VARIABLES ****//
     private int largeur, hauteur; //dimensions du personnage
@@ -44,6 +47,32 @@ public class Personnage {
     public void setVersDroite(boolean versDroite) {this.versDroite = versDroite;}
 
     public void setCompteur(int compteur) {this.compteur = compteur;}
+
+
+    public Image marche(String nom, int frequence){ //nom du personnage et fréquence des pas
+        String str;
+        ImageIcon ico;
+        Image img;
+
+        if (this.marche == false) {
+            if(this.versDroite == true){str = "/images/" + nom + "ArretDroite.png";}
+            else{str = "/images/" + nom + "ArretGauche.png";}
+        }else{
+            this.compteur++;
+            if (this.compteur / frequence == 0) { // quotient de la division euclidienne de compteur par frequence
+                if(this.versDroite == true){str = "/images/" + nom + "ArretDroite.png";}
+                else{str = "/images/" + nom + "ArretGauche.png";}
+            }else{
+                if(this.versDroite == true){str = "/images/" + nom + "MarcheDroite.png";}
+                else{str = "/images/" + nom + "MarcheGauche.png";}
+            }
+            if (this.compteur == 2 * frequence) {this.compteur = 0;}
+        }
+        // Affichage de l'image du personnage
+        ico = new ImageIcon(getClass().getResource(str));
+        img = ico.getImage();
+        return img;
+    }
 
 }
 
